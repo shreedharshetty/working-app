@@ -1,0 +1,23 @@
+
+<div data-role="header" data-theme = "a">
+  <h1>Event Management</h1>
+</div>
+<div data-role="controlgroup" data-type="horizontal" >
+  <% if user_signed_in? %>
+    Signed in as <%= current_user.email %>. Not you?
+    <%= link_to "Sign out", destroy_user_session_path, "data-role" => "button", :method => :delete %>
+  <% else %>
+    <%= link_to "Sign up", new_user_registration_path, "data-role" => "button" %><%= link_to "sign in", new_user_session_path, "data-role" => "button" %>
+  <% end %>
+</div>
+<div>
+  <% if user_signed_in? %>
+    <ul data-role="listview" data-inset="true"> 
+    		<li class = "ui-btn-right"><%= link_to "List Events", :controller => "events", :action => "index" %></li>
+    		<!-- <li><a href="#">Search Events</a></li> -->
+    		<li class = "ui-btn-right"><%= link_to 'Add Events', new_event_path %></li>
+        <li class = "ui-btn-right"><%= link_to 'Online Events', :controller=> "home", :action => "list" %></li>
+        <li class = "ui-btn-right"><%= link_to 'News', :controller=> "home", :action => "news" %></li>
+    </ul>
+  <% end %>
+</div>

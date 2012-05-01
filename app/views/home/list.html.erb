@@ -1,0 +1,14 @@
+<div data-role="header">
+   <%= link_to "Home", '/' , "class" => "ui-btn-left", "data-icon" => "home" %>	
+  <h1>Online Events</h1>
+</div>
+<div data-role="content">
+	<ul class="online-events" data-role="listview">
+		<% @items.each do |l| %>
+			<li>
+				<h3 class="title"><%= l['title'] %></h3>
+				<p><%= l['description'] %><span class="time"><%= l['time'] %></span><span class="link"><br /><a href="<%= l['link'] %>">View Details</a></span></p>
+			</li>	
+		<% end %>
+	</ul>
+</div>

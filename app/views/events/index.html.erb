@@ -1,0 +1,16 @@
+<div data-role="header">
+  <%= link_to "Home", '/' , "class" => "ui-btn-left", "data-icon" => "home" %>
+  <h1>Listing Events</h1>
+  <%= link_to 'Add', new_event_path, "data-icon" => "plus", "class" => "ui-btn-right" %>
+</div>
+
+<div data-role="content">
+  <ul data-role="listview">
+    <% @events.each do |event| %>
+      <li>
+        <%= link_to event.name, event %>
+        <%= link_to 'edit event', edit_event_path(event), "data-icon" => "gear" %>
+      </li>
+    <% end %>
+  </ul>
+</div>

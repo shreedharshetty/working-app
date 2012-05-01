@@ -1,0 +1,36 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.time{
+	color:#8d0d19;
+	padding-left:2%;
+}
+.link{
+	color:silver;
+	padding-left:1%;
+}
+.title{
+	color:#5a90bf;
+	padding-left:2%;
+}
+.online-events li{
+	list-style:none;
+	border:1px solid #e3e3e3;
+	margin:1%;
+	background:#fff;
+}
+.online-events li:hover{
+	background:#e3e3e3;
+}
+.online-events p{
+	padding-left:2%;
+}
+.online-events li a:hover{
+	background:#e3e3e3;
+	text-decoration:underline;
+}
+.online-events li a{
+	text-decoration:none;
+	color:green !important;
+	margin-top:10px;
+}

@@ -1,0 +1,42 @@
+<div data-role="header">
+   <%= link_to "Home", '/' , "class" => "ui-btn-left", "data-icon" => "home" %> 
+  <h1><%= @event.name %></h1>
+  <%= link_to 'Back', events_path, "class" => "ui-btn-right", "data-icon" => "delete" %>
+</div>
+
+<div data-role="content" data-theme = "e">
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <b>Name:</b>
+    <%= @event.name %>
+  </p>
+
+  <p>
+    <b>Description:</b>
+    <%= @event.description %>
+  </p>
+
+  <p>
+    <b>Venue:</b>
+    <%= @event.venue %>
+  </p>
+
+  <p>
+    <b>Date:</b>
+    <%= @event.date %>
+  </p>
+
+  <p>
+    <b>Time:</b>
+    <%= @event.time %>
+  </p>
+
+  <p>
+    <b>Contact:</b>
+    <%= @event.contact %>
+  </p>
+</div>
+<div data-role="footer">
+  <%= link_to 'Edit', edit_event_path(@event), "data-icon" => "gear" ,"class" => "ui-btn-left" %>
+</div>

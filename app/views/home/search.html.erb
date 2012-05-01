@@ -1,0 +1,76 @@
+<script type="application/javascript">
+$(document).ready(function(){
+     // Add a click listener on the button to get the location data
+     $('#getLocation').click(function(){
+          if (navigator.geolocation) {
+               navigator.geolocation.getCurrentPosition(onSuccess, onError);
+          } else {
+               // If location is not supported on this platform, disable it
+               $('#getLocation').value = "Geolocation not supported";
+               $('#getLocation').unbind('click');
+          }         
+     });
+     
+});
+
+// create the geonames namespace for calling the API
+var geonames = {};
+     geonames.baseURL = "http://ws.geonames.org/";
+     geonames.method = "findNearbyWikipediaJSON";
+     geonames.search = function(lat,lng){
+     
+     // get the data in JSON format from Geonames
+     $.getJSON(geonames.baseURL + geonames.method + '?formatted=true&lat=' + lat + '&lng=' + lng + '&style=full&radius=10&maxRows=25',function(data){
+          // Loop through each item in the result and add it to the DOM
+          $.each(data.geonames, function() {
+               $('<li></li>')
+               .hide()
+               .append('<a href="http://'+this.wikipediaUrl+'"><h2>'+this.title+'</h2></a><br /><p>'+ this.summary + '</p><span class="ui-li-aside"><h5>'+this.distance+' (km)</h5></span>')
+               .appendTo('#wikiList')
+               .show();
+          });
+          // Once the data is added to the DOM, make the transition
+          $.mobile.changePage('#dashboard',"slide",false,true);
+     
+          // refresh the list to make sure the theme applies properly
+          $('#wikiList').listview('refresh');
+     });
+};
+
+// Success function for Geolocation call
+function onSuccess(position)
+{
+     geonames.search(position.coords.latitude,position.coords.longitude);
+}
+
+// Error function for Geolocation call
+function onError(msg)
+{
+     alert(msg);
+}
+
+</script>
+<div data-role="page">
+     <div data-role="header">
+     <h1>Find Location</h1>
+     </div>
+    <div data-role="content">
+        <p>This application will use the <a href="http://geonames.org">Geonames</a> API and your location to bring back a list of Wikipedia articles about features that are near you. To get started, click the button below and allow the application to read your geolocation information.</p>
+        <input type="button" value="Get My Location" id="getLocation" />
+    </div>
+    <div data-role="footer">
+     <h4>By <a href="http://blog.digitalbackcountry.com">Ryan Stewart</a></h4>
+    </div>
+</div>
+<div data-role="page" id="dashboard">
+     <div data-role="header">
+     <h1>Data List</h1>
+    </div>
+    <div data-role="content">
+     <ul id="wikiList" data-role="listview" data-theme="c">
+        </ul>
+    </div>
+    <div data-role="footer">
+     <h4>By <a href="http://blog.digitalbackcountry.com">Ryan Stewart</a></h4>
+    </div>
+</div>
